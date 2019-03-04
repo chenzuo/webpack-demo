@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin'); //css打包插件
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //打包html的插件
 module.exports = {
     entry: {
@@ -31,6 +31,6 @@ module.exports = {
             filename: 'app/index.html',
             template: 'app/src/page/index.html'
         }),
-        new ExtractTextPlugin('css/[name].css')
+        new ExtractTextPlugin('css/[name].[chunkHash:5].css')
     ]
 };
