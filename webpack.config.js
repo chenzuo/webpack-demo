@@ -3,6 +3,7 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin'); //css打包插件
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //打包html的插件
 var cleanwebpackplugin = require('clean-webpack-plugin'); //清理打包目录
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     entry: {
         './index': './app/src/js/index.js' //入口文件
@@ -10,10 +11,23 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css$/,
-            use: ExtractTextPlugin.extract({
-                fallback: "style-loader",
-                use: "css-loader"
-            })
+            use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: '../'
+                    }
+                },
+                "css-loader"
+            ]
+        }, {
+            test: /\.(jpg|png|gif)$/,
+            use: [{
+                loader: "url-loader",
+                options: {
+                    limit: 50,
+                    outputPath: "images"
+                }
+            }]
         }]
     },
     output: {
@@ -28,6 +42,9 @@ module.exports = {
             filename: 'index.html',
             template: 'app/src/index.html'
         }),
-        new ExtractTextPlugin('css/[name].[chunkHash:5].css')
+        new ExtractTextPlugin('css/[name].[chunkHash:5].css'),
+        new MiniCssExtractPlugin({
+            filename:"css/[name].[chunkHash:5].css"
+        })
     ]
 };
