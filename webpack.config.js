@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //打包html的插件
 module.exports = {
     entry: {
@@ -10,8 +11,11 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css$/,
-            use: ['style-loader', 'css-loader']
-        }, ]
+            use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader"
+            })
+        }]
     },
     output: {
         //__dirname 当前webpack.config.js的路径
@@ -26,6 +30,7 @@ module.exports = {
             chunks: ['app/dist/js/index'],
             filename: 'app/index.html',
             template: 'app/src/page/index.html'
-        })
+        }),
+        new ExtractTextPlugin('css/[name].css')
     ]
 };
