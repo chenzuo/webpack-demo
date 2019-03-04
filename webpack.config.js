@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin'); //css打包插件
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //打包html的插件
+var cleanwebpackplugin = require('clean-webpack-plugin'); //清理打包目录
 module.exports = {
     entry: {
         './index': './app/src/js/index.js' //入口文件
@@ -22,6 +23,7 @@ module.exports = {
     },
     //插件
     plugins: [
+        new cleanwebpackplugin(["dist"]),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'app/src/index.html'
