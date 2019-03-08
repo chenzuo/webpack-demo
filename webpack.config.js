@@ -5,7 +5,7 @@ var cleanwebpackplugin = require('clean-webpack-plugin'); //清理打包目录
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     entry: {
-        './index': './app/src/js/index.js' //入口文件
+        'index': './app/src/js/index.js' //入口文件
     },
     module: {
         rules: [{
@@ -39,7 +39,8 @@ module.exports = {
         new cleanwebpackplugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'app/src/index.html'
+            template: 'app/src/index.html',
+            hash: true, //为了更好的 cache，可以在文件名后加个 hash。
         }),
         new MiniCssExtractPlugin({
             filename: "css/[name].[chunkHash:5].css"
