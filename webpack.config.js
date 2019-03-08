@@ -32,17 +32,17 @@ module.exports = {
     output: {
         //__dirname 当前webpack.config.js的路径
         filename: 'js/[name].[chunkHash:5].js', //打包后index.js的名字，
-        //   path: path.resolve(__dirname)
+        path: path.resolve(__dirname, 'dist')
     },
     //插件
     plugins: [
-        new cleanwebpackplugin(["dist"]),
+        new cleanwebpackplugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'app/src/index.html'
         }),
         new MiniCssExtractPlugin({
-            filename:"css/[name].[chunkHash:5].css"
+            filename: "css/[name].[chunkHash:5].css"
         })
     ]
 };
