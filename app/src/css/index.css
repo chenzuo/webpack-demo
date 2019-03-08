@@ -3,6 +3,10 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
+.fx {
+    font: 100;
+}
+
 .imgfx {
     font-style: inherit;
     font-size: 12px;
